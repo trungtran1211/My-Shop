@@ -1,0 +1,31 @@
+.header-top{
+    min-height: 10px;
+
+    ul {
+        position: relative;
+        height: 35px;
+        z-index: 10;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #5e7f89;
+      }
+      
+      li {
+        font-family: 'Poppins', sans-serif;
+        float: right;
+      }
+      li a {
+        font-size: 14px;
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 9px 16px;
+        text-decoration: none;
+      }
+      
+      li a:hover {
+        color: #103e50;
+      }
+}
