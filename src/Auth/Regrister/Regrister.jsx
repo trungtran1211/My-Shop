@@ -2,9 +2,14 @@ import React from 'react';
 import RegisterForm from '../RegristerForm/RegristerForm';
 
 const Regrister = () => {
+
+    const handleTodoFormSubmit = (values) =>{
+        console.log('form:', values);
+    }
+
     return (
         <div>
-            <RegisterForm/>
+            <RegisterForm onSubmit={handleTodoFormSubmit} />
         </div>
     );
 };
