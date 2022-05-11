@@ -4,7 +4,6 @@ import './Header-wrapper.scss'
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
 import Regrister from '../../Auth/Regrister/Regrister';
 import Typography from '@mui/material/Typography';
@@ -43,7 +42,6 @@ const HeaderTop = () => {
             </ul>
             
             <Dialog disableEscapeKeyDown  open={open} onClose={handleClose}>
-                <DialogTitle>Subscribe</DialogTitle>
                 <DialogContent>
                         <Regrister/>
                 </DialogContent>

@@ -6,28 +6,37 @@ import { TextField } from '@material-ui/core';
 InputField.propTypes = {
     form: PropTypes.object.isRequired,
     name: PropTypes.string.isRequired,
-    lable: PropTypes.string,
+    label: PropTypes.string,
     disabled: PropTypes.bool,
 };
 
 function InputField(props) {
-    const {form, name, lable, disabled} = props;
+    //nhận dữ liệu từ form
+    const {form, name, label, disabled} = props;
+    //validate form với yub
+    const {formState: { errors }} = form;
+    const hasserror = errors[name];
+
+
     return (
         <Controller
             name={name}
             control={form.control}
-            render={({ field:{onBlur, onChange, value, name, ref} }) => 
+            render={({ field:{onBlur, onChange, value,name, ref} }) => 
             <TextField 
             onChange={onChange}
             onBlur={onBlur}
             value={value}
             inputRef={ref}
-            lable={lable}
+            label={label}
             name={name}
             fullWidth
             disabled={disabled}
             variant="outlined"
             margin="normal"
+
+            error = {!!hasserror}
+            helperText ={errors[name]?.message}
             />}
         />
     );
