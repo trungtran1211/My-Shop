@@ -1,0 +1,24 @@
+.slider{
+    width: 75%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+}
+
+.slider__img img {
+  display: block;
+  width: 855px;
+  height: 400px;
+  object-fit: cover;
+}
+.swiper-button-next{
+    --swiper-theme-color: #ff0000 !important;
+    --swiper-navigation-size: 30px !important;
+}
+.swiper-button-prev{
+    --swiper-theme-color: #ff0000 !important;
+    --swiper-navigation-size: 30px !important;
+}

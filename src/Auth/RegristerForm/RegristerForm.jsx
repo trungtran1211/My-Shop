@@ -1,10 +1,11 @@
-import { Button, Typography } from '@material-ui/core';
+import { Button, LinearProgress, Typography } from '@material-ui/core';
 import { LockOpenOutlined } from '@material-ui/icons';
 import { Avatar } from '@mui/material';
 import { makeStyles } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
 import React from 'react';
 import InputField from '../../FormControl/InputField';
-import PropTypes from 'prop-types';
+import PasswordField from '../../FormControl/PasswordField'
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
@@ -47,12 +48,12 @@ function RegristerForm(props) {
 
     //Validate form
     const schema = yup.object({
-        fullname: yup
+        name: yup
         .string().required('Vui lòng nhập')
         .test('Nên có ít nhất hai từ','Vui lòng nhập đầy đủ họ tên của bạn', (value)=>{
         return value.split(' ').length >= 2;
         }),
-        phone: yup.string().required('Vui lòng nhập số điện thoại').max(9, 'Vui lòng nhập đủ 9 số'),
+        phone: yup.string().required('Vui lòng nhập số điện thoại').max(10, 'Vui lòng nhập đủ 9 số'),
         address: yup.string().required('Vui lòng nhập địa chỉ của bạn'),
         email: yup.string().required('Vui lòng điền email của bạn')
         .email('Vui lòng điền đúng email'),
@@ -61,30 +62,35 @@ function RegristerForm(props) {
             /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
             'Mật khẩu chứa ít nhất 8 ký tự, một chữ hoa số và ký tự đặc biệt'
           ),
-          confirmPass: yup.string().required('Vui lòng nhập lại mật khẩu')
+        confirmpass: yup.string().required('Vui lòng nhập lại mật khẩu')
         .oneOf([yup.ref('password'), null], 'Mật khẩu phải trùng khớp'),
       }).required();
 
     const form = useForm({
         defaultValues: {
-            fullname: '',
+            name: '',
             phone: '',
             address: '',
             email: '',
             password: '',
+            confirmpass: '',
         },
         resolver: yupResolver(schema)
     });
 
-    const handleSubmit = (values) => {
+    const handleSubmit = async (values) => {
         const {onSubmit} = props;
         if(onSubmit){
-            onSubmit(values);
+           await onSubmit(values);
         }
         form.reset();
+
     }
+    const {isSubmitting} = form.formState;
     return (
         <div className={classes.root}>
+            {isSubmitting && <LinearProgress className={classes.proress}/>}
+
             <Avatar className={classes.avatar}>
                 <LockOpenOutlined/>
             </Avatar>
@@ -92,13 +98,13 @@ function RegristerForm(props) {
                 Create an Account
             </Typography>
             <form onSubmit={form.handleSubmit(handleSubmit)}>
-                <InputField name="fullname" label="Full name" form={form}/>
+                <InputField name="name" label="Full name" form={form}/>
                 <InputField name="phone" label="Phone" form={form}/>
                 <InputField name="address" label="Address" form={form}/>
                 <InputField name="email" label="Email" form={form}/>
-                <InputField name="password" label="Password" form={form}/>
-                <InputField name="confirmPass" label="Confirm Password" form={form}/>
-                <Button type="submit" className={classes.submit} variant="contained" color="primary" size="large" fullWidth> 
+                <PasswordField name="password" label="Password" form={form}/>
+                <PasswordField name="confirmpass" label="Confirm Password" form={form}/>
+                <Button disabled={isSubmitting} type="submit" className={classes.submit} variant="contained" color="primary" size="large" fullWidth> 
                     Create an Account
                 </Button>
             </form>

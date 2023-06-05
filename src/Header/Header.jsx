@@ -1,6 +1,7 @@
 import React from 'react';
 import HeaderMain from './Header-wrapper/HeaderMain';
-import HeaderTop from './Header-wrapper/HeaderTop'
+import HeaderTop from './Header-wrapper/HeaderTop';
+import './Header.scss';
 
 const Header = () => {
     return (

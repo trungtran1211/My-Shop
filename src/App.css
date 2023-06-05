@@ -2,6 +2,7 @@
    v2.0 | 20110126
    License: none (public domain)
 */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -28,8 +29,11 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
-body {
-	line-height: 1;
+html,
+body{
+  width:100%;
+  font-family: 'Inter', sans-serif;
+
 }
 ol, ul {
 	list-style: none;
@@ -46,3 +50,9 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }   
+a {
+	text-decoration: none;
+}
+img {
+	max-width: 100%;
+}
