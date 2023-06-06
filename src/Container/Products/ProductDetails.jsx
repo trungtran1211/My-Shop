@@ -17,6 +17,7 @@ function ProductDetails() {
             console.log(e.response);
         });
     },[id]);
+    console.log(product);
     return (
         <div className='container main'>
             test
