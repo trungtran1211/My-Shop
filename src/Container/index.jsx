@@ -16,9 +16,7 @@ const Containerbody = () => {
                 <BrandList/>
                 <Products/>
             </div>
-            
         </>
-        
     );
 };
 

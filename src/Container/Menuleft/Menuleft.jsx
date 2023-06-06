@@ -20,7 +20,6 @@ const Menuleft = () => {
                 console.log("Loi",e);
             });
     };
-    console.log(category)
     return (
         <div id="sidebar" className="Menuleft">
             <nav>

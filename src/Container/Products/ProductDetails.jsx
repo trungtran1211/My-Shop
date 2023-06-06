@@ -11,15 +11,12 @@ function ProductDetails() {
     useEffect(() => {
         ProductApi.getDetail(id)
         .then((response) => {
-            console.log(response);
             setProduct(response.data.item);
             setComment(response.data.comments);
         }).catch((e) => {
             console.log(e.response);
         });
-    },[]);
-    console.log(product);
-    console.log(comments);
+    },[id]);
     return (
         <div className='container main'>
             test

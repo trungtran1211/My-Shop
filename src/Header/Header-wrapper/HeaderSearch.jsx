@@ -47,7 +47,7 @@ const HeaderSearch = () => {
         setProduct([]);
     }
    
-    const test = () => {
+    const HandleClose = () => {
         listSearch.style.opacity = "0";
         closeSearch.style.opacity = "0";
         setSearchKey('')
@@ -62,16 +62,16 @@ const HeaderSearch = () => {
                 onChange={handleInputChange}
                 value={searchKey}
             />
-            <i className="fa fa-times-circle-o closeSearch" onClick={test} aria-hidden="true"></i>
-            <Link to={`/search?key=${searchKey}`} onClick={test} className={!searchKey && searchKey === '' ? 'disabled' : '' }>
+            <i className="fa fa-times-circle-o closeSearch" onClick={HandleClose} aria-hidden="true"></i>
+            <Link to={`/search?key=${searchKey}`} onClick={HandleClose} className={!searchKey && searchKey === '' ? 'disabled' : '' }>
                 <button type='submit' onClick={handleRemoveSearch} className='search-icon'>
                     <i className="fa fa-search" aria-hidden="true"></i>
                 </button>
             </Link>
             <ul className='listSearch__product'>
                 { product.length === 0 ? <li>Không tìm thấy sản phẩm với từ khoá này.</li> : product.map((result) => (
-                    <li key={result.prod_id}>
-                        <Link to={'#'}>
+                    <li key={result.prod_id} onClick={HandleClose}>
+                        <Link to={`/detail/${result.prod_id}`}>
                             {result.tensanpham}
                         </Link>
                     </li>
