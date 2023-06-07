@@ -13,6 +13,19 @@ export const login = createAsyncThunk('users/login', async payload => {
     return data.data;
 })
 
+    
+
+const getUsers = () => {
+    userApi.getUser()
+    .then((response) => {
+           console.log(response);
+    })
+        .catch((e) => {
+            console.log(e.response);
+    });
+};
+getUsers();
+
 const userSlice = createSlice({
     name: 'user',
     initialState: {

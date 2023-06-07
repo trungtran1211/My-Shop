@@ -9,7 +9,7 @@ const Products = () => {
     const [ProductHot, setProductHot] = useState([]);
     const [ProductTrend, setProductTrend] = useState([]);
     useEffect(() => {
-        getProductList()
+        getProductList();
     }, []);
 
     const getProductList = () => {

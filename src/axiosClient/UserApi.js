@@ -1,6 +1,5 @@
+import { useEffect } from "react";
 import http from "./http";
-const tokenApi = JSON.parse(localStorage.getItem('user')) || {};
-const token = tokenApi.token; 
 
 const  postRegrister = (data) => {
     return http.post('/regrister', data);
@@ -9,9 +8,8 @@ const  postRegrister = (data) => {
 const  postLogin = (data) => {
     return http.post('/login1', data);  
 }
-
-const  getUser = () => {
-    return http.get(`/userinfo/?token="${token}"`);  
+const  getUser = (token) => {
+    return http.get(`/user-info?token="${token}"`);  
 }
 const exportObject = {
     postRegrister,
