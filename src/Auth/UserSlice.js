@@ -13,30 +13,21 @@ export const login = createAsyncThunk('users/login', async payload => {
     return data.data;
 })
 
-    
-
-const getUsers = () => {
-    userApi.getUser()
-    .then((response) => {
-           console.log(response);
-    })
-        .catch((e) => {
-            console.log(e.response);
-    });
-};
-getUsers();
-
 const userSlice = createSlice({
     name: 'user',
     initialState: {
         current: JSON.parse(localStorage.getItem('user')) || {},
         settings: {},
+        user: {},
     },
     reducers: {
         logout(state){
             localStorage.removeItem('user');
             state.current = {}
-        }
+        },
+        setUser: (state, action) => {
+            state.user = action.payload;
+        },
     },
     extraReducers: {
         [register.fulfilled]: (state, action) =>{
@@ -49,5 +40,5 @@ const userSlice = createSlice({
 });
 
 const {actions, reducer} = userSlice;
-export const { logout } = actions;
+export const { logout, setUser } = actions;
 export default reducer;

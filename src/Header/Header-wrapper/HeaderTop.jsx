@@ -10,7 +10,8 @@ import { AccountCircle, Close } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core/styles";
 import Login from "../../Auth/Login/Login";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../../Auth/UserSlice";
+import { logout, setUser } from "../../Auth/UserSlice";
+import userApi from '../../axiosClient/UserApi';
 
 const useStyles = makeStyles((theme) => ({
   iconclose: {
@@ -35,6 +36,7 @@ const HeaderTop = () => {
   //KIểm tra header khi đăng nhập
 
   const loginUser = useSelector((state) => state.user.current);
+  const token = useSelector((state) => state.user.current.token);
   const isLogin = !!loginUser.token;
 
   //Form đăng ký
@@ -48,7 +50,6 @@ const HeaderTop = () => {
 
   //form user
   const [anchorEl, setAnchorEl] = React.useState(null);
-
   const handleClick = (e) => {
     setAnchorEl(e.currentTarget);
   };
@@ -63,21 +64,17 @@ const HeaderTop = () => {
     dispatch(action);
   };
 
-  // const [info, setInfo] = useState([]);
-  // useEffect(() => {
-  //     getInfo()
-  // }, []);
+  useEffect(() => {
+    userApi.getUser(token)
+    .then((response) => {
+        dispatch(setUser(response.data.result));
+    })
+    .catch((e) => {
+        console.log(e.response);
+    });
+  },[token]);  
 
-  // const getInfo = () => {
-  //     userApi.getAll()
-  //         .then((response) => {
-  //             setInfo(response);
-  //         })
-  //         .catch((e) => {
-  //             console.log(e.response);
-  //         });
-  // };
-  // console.log(info);
+  const userInfo = useSelector((state) => state.user.user);
 
   return (
     <Typography className="header-top" component={"div"} variant={"body2"}>
@@ -101,7 +98,7 @@ const HeaderTop = () => {
                 sx={{ padding: 100 }}
                 onClick={handleClick}>
                 <AccountCircle />
-                <p></p>
+                <p>{userInfo.name}</p>
               </IconButton>
             </li>
             <li>

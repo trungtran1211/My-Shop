@@ -2,6 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const HeaderNav = () => {
+
+    const handleClickCart = () => {
+        
+    };
+
     return (
         <div className="Header-nav">
             <ul className="sidenav">
@@ -25,10 +30,10 @@ const HeaderNav = () => {
                         Tuyển Dụng
                     </Link>
                 </li>
-                <Link to={'#'}>
+                <li onClick={handleClickCart}>
                     <i className="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;Cart | &nbsp; 
                     <span className="numberCart">1</span>
-                </Link>
+                </li>
             </ul>
             
         </div>

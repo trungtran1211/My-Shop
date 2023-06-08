@@ -9,7 +9,7 @@ const  postLogin = (data) => {
     return http.post('/login1', data);  
 }
 const  getUser = (token) => {
-    return http.get(`/user-info?token="${token}"`);  
+    return http.get(`/user-info?token=${token}`);  
 }
 const exportObject = {
     postRegrister,
