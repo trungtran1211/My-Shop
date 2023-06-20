@@ -6,8 +6,11 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import "swiper/css";
 import { Navigation } from "swiper";
 import numeral from 'numeral';
+import { useSelector } from 'react-redux';
 
 const ProductNews = ({productNew}) => {
+
+    const infoUser = useSelector((state) => state.user.user.id);
     return (
         <div className='product'>
             <h2 className='product__title'>SẢN PHẨM MỚI NHẤT</h2>
@@ -49,7 +52,10 @@ const ProductNews = ({productNew}) => {
                                     </Link>    
                                 </li>
                                 <li>
-                                    <Link to={'#'}>
+                                    <Link to={{
+                                                pathname: `/cart/ad/${item.prod_id}`,
+                                                state: { infoUser: infoUser }
+                                            }}>
                                         <i className="fa fa-heart" aria-hidden="true"></i>
                                     </Link>
                                 </li>

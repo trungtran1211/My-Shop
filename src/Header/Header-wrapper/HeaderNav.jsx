@@ -1,11 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import cart from '../../axiosClient/CartApi';
+import { useSelector } from 'react-redux';
+import { useState } from 'react';
 
 const HeaderNav = () => {
+    const infoUser = useSelector((state) => state.user.user.id);
+    const [cartList, setCartList] = useState();
+    useEffect(() => {
+        cart.getAll(infoUser)
+            .then((response) => {
+                setCartList(response.data.count);
+        })
+            .catch((e) => {
+                console.log("Loi",e);
+        });
+    },[infoUser]);
 
-    const handleClickCart = () => {
-        
-    };
 
     return (
         <div className="Header-nav">
@@ -30,9 +41,9 @@ const HeaderNav = () => {
                         Tuyển Dụng
                     </Link>
                 </li>
-                <li onClick={handleClickCart}>
+                <li>
                     <i className="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;Cart | &nbsp; 
-                    <span className="numberCart">1</span>
+                    <span className="numberCart">{cartList}</span>
                 </li>
             </ul>
             
