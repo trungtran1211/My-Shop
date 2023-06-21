@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Image } from '../../axiosClient/httpImage';
 import './product.scss';
@@ -7,10 +7,26 @@ import "swiper/css";
 import { Navigation } from "swiper";
 import numeral from 'numeral';
 import { useSelector } from 'react-redux';
+import cart from '../../axiosClient/CartApi';
 
 const ProductNews = ({productNew}) => {
-
+    console.log(productNew);
     const infoUser = useSelector((state) => state.user.user.id);
+
+    const handleAddCart = (id) => {
+        
+            cart.addCart(id,infoUser)
+                .then((response) => {
+                    console.log(response);
+            })
+                .catch((e) => {
+                    console.log("Loi",e);
+            });
+        
+    };
+
+
+
     return (
         <div className='product'>
             <h2 className='product__title'>SẢN PHẨM MỚI NHẤT</h2>
@@ -47,15 +63,12 @@ const ProductNews = ({productNew}) => {
                         <div className='action'>
                             <ul className='action__list'>
                                 <li>
-                                    <Link to={'#'}>
+                                    <div onClick={() => handleAddCart(item.prod_id)}>
                                         <i className="fa fa-cart-plus" aria-hidden="true"></i>
-                                    </Link>    
+                                    </div>    
                                 </li>
                                 <li>
-                                    <Link to={{
-                                                pathname: `/cart/ad/${item.prod_id}`,
-                                                state: { infoUser: infoUser }
-                                            }}>
+                                    <Link to={'#'}>
                                         <i className="fa fa-heart" aria-hidden="true"></i>
                                     </Link>
                                 </li>
